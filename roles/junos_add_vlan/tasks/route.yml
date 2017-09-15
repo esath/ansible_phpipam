@@ -1,0 +1,11 @@
+- name: Add new route
+  ntc_config_command:
+    connection: ssh
+    platform: juniper_junos
+    commands:
+      - set routing-instances {{ vrf }} routing-options static route {{ dest_network }} next-hop {{ a_next_hop }}
+
+    host: "{{ inventory_hostname }}"
+    username: "{{ username }}"
+    password: "{{ password }}"
+

@@ -1,0 +1,40 @@
+
+- name: Configure routers
+  hosts: srx
+  connection: local
+
+
+  tasks:
+    - name: Include role for new customer
+      include_role:
+        name: junos_add_vlan
+        tasks_from: new_vrf
+      when: mask is defined and vrf is defined
+      tags:
+        - add
+
+    - name: Include role for delete
+      include_role:
+        name: junos_add_vlan
+        tasks_from: del_vrf
+      when: vlan is defined and vrf is defined
+      tags:
+        - del
+
+
+    - name: New static route
+      include_role:
+        name: junos_add_vlan
+        tasks_from: route
+      when: dest_network is defined
+      tags:
+        - route
+
+  vars_prompt:
+    - name: username
+      prompt: please enter router username
+      private: no
+    - name: password
+      prompt: please enter router password
+      private: yes
+

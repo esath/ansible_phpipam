@@ -1,0 +1,17 @@
+---
+
+#- include_vars: ../../../lab_vars.yml
+
+- name: delete vrf from router
+  ntc_config_command:
+    connection: ssh
+    platform: juniper_junos
+    commands:
+      - delete routing-instances {{ vrf }}
+
+    host: "{{ inventory_hostname }}"
+    username: "{{ username }}"
+    password: "{{ password }}"
+
+
+

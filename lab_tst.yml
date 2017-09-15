@@ -1,0 +1,30 @@
+---
+
+
+- name: call IPAM API
+  hosts: localhost
+  gather_facts: no
+
+  tasks:
+
+    - name: Delete reservation from IPAM
+      become: yes
+      when: vlan is defined and vrf is defined
+      tags:
+        - del
+      script: lab_tst.sh {{ vrf }} {{ vlan }}
+      delegate_to: localhost
+
+    - name: Make reservation to IPAM
+      become: yes
+      when: mask is defined and vrf is defined
+      tags:
+        - add
+      script: lab_tst.py -n {{ vrf }} -m {{ mask }}
+      delegate_to: localhost
+
+
+- include: lab_juniper.yml
+
+#- include: lab_route.yml
+

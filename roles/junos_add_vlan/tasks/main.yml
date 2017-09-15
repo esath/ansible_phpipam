@@ -1,0 +1,18 @@
+---
+#
+# Playbook includes correct role directly
+# You don't need to define anything here.
+#
+
+#- name: Include new-vrf addition if tag is defined
+#  include: new_vrf.yml
+#  tags: add
+
+#- name: Delete instance if tag is defined
+#  include: del_vrf.yml
+#  tags: del
+
+- name: Add static route for BDN
+  include: route.yml
+  tags: route
+

@@ -1,0 +1,21 @@
+---
+
+- include_vars: ../../../lab_vars.yml
+
+- name: Add new vrf to router
+  ntc_config_command:
+    connection: ssh
+    platform: juniper_junos
+    commands:
+      - set routing-instances {{ a_vrf }} instance-type vrf
+#      - set routing-instances {{ a_vrf }} interface lo0.1
+      - set routing-instances {{ a_vrf }} route-distinguisher 65202:{{ a_rd }}
+      - set routing-instances {{ a_vrf }} vrf-target target:65202:{{ a_target }}
+#      - set routing-instances {{ a_vrf }} routing-options static route {{ bdn_network }} next-hop {{ bdn_gw }}
+
+    host: "{{ inventory_hostname }}"
+    username: "{{ username }}"
+    password: "{{ password }}"
+
+
+

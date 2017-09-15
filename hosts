@@ -1,0 +1,10 @@
+[dn_routers]
+dn55648 ansible_host='192.168.36.2'
+dn55469 ansible_host='192.168.36.3'
+
+[srx]
+srx001 ansible_host='10.1.1.111'
+
+[localhost]
+ansible_python_interpreter=/usr/bin/python
+
